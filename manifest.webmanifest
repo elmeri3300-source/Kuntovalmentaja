@@ -2,6 +2,7 @@
   "id": "./",
   "name": "Tommin Kuntovalmentaja",
   "short_name": "Kuntovalmentaja",
+  "description": "Henkilökohtainen kuntovalmentaja: treenit, eteneminen ja seuranta.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
