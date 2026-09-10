@@ -1,58 +1,80 @@
 <!doctype html>
 <html lang="fi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<meta name="theme-color" content="#111827" />
-<link rel="manifest" href="manifest.webmanifest" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
 <title>Tommin Kuntovalmentaja</title>
 <style>
-:root{--bg:#0b1220;--card:#111827;--muted:#94a3b8;--text:#f8fafc;--accent:#22c55e;--accent2:#38bdf8;--danger:#ef4444}
-*{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#08111f,#0b1220 28%,#0f172a);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-header{padding:20px 16px 10px;position:sticky;top:0;background:rgba(11,18,32,.92);backdrop-filter:blur(10px);z-index:3;border-bottom:1px solid #1f2937}
-header h1{font-size:22px;margin:0 0 4px} header p{margin:0;color:var(--muted);font-size:13px}
-main{max-width:760px;margin:auto;padding:14px 14px 90px}.grid{display:grid;gap:12px}.card{background:rgba(17,24,39,.96);border:1px solid #243041;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
-.row{display:flex;gap:10px;align-items:center;justify-content:space-between}.stat{font-size:28px;font-weight:800}.small{font-size:13px;color:var(--muted)}
-button{border:0;border-radius:12px;padding:12px 14px;font-weight:700;background:#243041;color:#fff;cursor:pointer}button.primary{background:var(--accent);color:#052e16}button.secondary{background:var(--accent2);color:#082f49}button.danger{background:#3f1d1d;color:#fecaca}
-input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:16px}.exercise{padding:12px;border-radius:12px;background:#0f172a;border:1px solid #1e293b;margin-top:10px}.exercise h3{margin:0 0 4px;font-size:16px}.setline{display:grid;grid-template-columns:48px 1fr 1fr 76px;gap:8px;align-items:center;margin-top:8px}.done{opacity:.55;text-decoration:line-through}.coach{border-left:4px solid var(--accent2)}
-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,17,31,.97);border-top:1px solid #243041;display:flex;justify-content:center;z-index:5}.tabs{width:min(760px,100%);display:grid;grid-template-columns:repeat(4,1fr)}.tabs button{border-radius:0;background:transparent;color:var(--muted);padding:12px 4px;font-size:12px}.tabs button.active{color:#fff;background:#111827}.hidden{display:none}.pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#1f2937;color:#cbd5e1;font-size:12px}.progress{height:10px;background:#1f2937;border-radius:999px;overflow:hidden}.bar{height:100%;background:var(--accent);width:0%}
-</style>
-</head>
-<body>
-<header><h1>Tommin Kuntovalmentaja</h1><p>Selkeä treeniohjaus, seuranta ja eteneminen</p></header>
-<main>
-<section id="home" class="grid tabpage">
- <div class="card coach"><div class="small">VALMENTAJAN OHJE TÄNÄÄN</div><h2 id="coachTitle">Aloitetaan maltilla</h2><p id="coachText">Tee päivän treeni rauhassa. Jätä 1–3 toistoa varastoon ja keskity hyvään tekniikkaan.</p></div>
- <div class="card"><div class="row"><div><div class="small">VIIKON TREENIT</div><div class="stat" id="weekCount">0 / 3</div></div><div class="pill" id="streak">Putki 0 vk</div></div><div class="progress"><div id="weekBar" class="bar"></div></div></div>
- <div class="card"><div class="small">SEURAAVA TREENI</div><h2 id="nextName">Koko keho A</h2><p class="small" id="nextDesc">Perusvoimaa ja hyvää tekemisen tuntumaa.</p><button class="primary" onclick="openWorkout()">Aloita treeni</button></div>
+:root{--bg:#07101f;--card:#101b2d;--card2:#16243a;--text:#f5f7fb;--muted:#a9b4c5;--green:#18d36e;--blue:#2488ff;--line:#263650}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(#07101f,#0a1425);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
+main{max-width:720px;margin:auto;padding:22px 18px 90px} h1{font-size:29px;margin:4px 0} h2{font-size:19px;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 22px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;margin:13px 0;box-shadow:0 5px 18px #0003}
+.row{display:flex;gap:10px;flex-wrap:wrap}.pill{background:#18263a;border:1px solid #2b3b55;border-radius:999px;padding:9px 13px;color:#dbe4f1}
+button{border:0;border-radius:12px;padding:13px 15px;font-weight:700;font-size:15px} .primary{background:var(--green);color:#03150b;flex:1}.secondary{background:var(--blue);color:white}.ghost{background:#1a2940;color:white}
+.exercise{padding:13px 0;border-top:1px solid var(--line)}.exercise:first-of-type{border-top:0}.small{font-size:13px;color:var(--muted)}
+input,select{background:#0b1627;color:white;border:1px solid #31425e;border-radius:10px;padding:11px;width:100%;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--card2);padding:13px;border-radius:12px}.stat b{font-size:22px;display:block}
+nav{position:fixed;bottom:0;left:0;right:0;background:#091321ee;border-top:1px solid #24334a;display:flex;justify-content:center;gap:5px;padding:8px}
+nav button{background:transparent;color:#aeb9ca;font-size:12px;padding:8px 13px}.active{color:var(--green)!important}
+.hidden{display:none}.done{opacity:.55;text-decoration:line-through}.notice{padding:10px 12px;border-radius:10px;background:#102a22;color:#baf5d2;margin:10px 0}
+</style></head>
+<body><main>
+<section id="home">
+<h1>Tommin Kuntovalmentaja</h1><p class="sub">Laihtuminen • lihaskunto • 2–3 lihaskuntotreeniä / viikko</p>
+<div class="card"><h2>Miten tänään menee?</h2><div class="row">
+<button class="pill" onclick="feel='hyvä';recommend()">💪 Hyvä</button>
+<button class="pill" onclick="feel='normaali';recommend()">🙂 Normaali</button>
+<button class="pill" onclick="feel='väsynyt';recommend()">😴 Väsynyt</button></div>
+<div id="rec" class="notice">Valitse päivän fiilis, niin valmentaja ehdottaa harjoitusta.</div></div>
+<div class="grid">
+<div class="stat"><span class="small">Tällä viikolla</span><b id="weekCount">0</b><span class="small">harjoitusta</span></div>
+<div class="stat"><span class="small">Lihaskunto</span><b id="strengthCount">0 / 2</b><span class="small">minimitavoite</span></div></div>
+<div class="card"><h2>Päivän harjoitus</h2><div id="todayText">Koko kehon harjoitus</div><p class="small" id="todayWhy">Valitse fiilis yllä.</p>
+<div class="row"><button class="primary" onclick="show('workout')">Aloita treeni</button><button class="ghost" onclick="show('log')">Kirjaa muu liikunta</button></div></div>
+<div class="card"><h2>Viikon tavoite</h2><p>🏋️ 2 lihaskuntotreeniä + halutessa kolmas<br>🚶🚴🎿 Kevyttä ja reipasta arkiliikuntaa useana päivänä<br>😴 Palautuminen kuuluu ohjelmaan.</p></div>
 </section>
-<section id="workout" class="grid tabpage hidden">
- <div class="card"><div class="row"><div><div class="small">PÄIVÄN TREENI</div><h2 style="margin:4px 0" id="workoutName">Koko keho A</h2></div><button onclick="resetWorkout()">Nollaa</button></div><p class="small">Kirjaa paino ja toistot. Merkitse sarja tehdyksi napista.</p><div id="exerciseList"></div><button class="primary" style="width:100%;margin-top:14px" onclick="finishWorkout()">Tallenna treeni</button></div>
+
+<section id="workout" class="hidden">
+<h1 id="workTitle">Koko keho A – kuntosali</h1><p class="sub">Rauhallinen tekniikka. Jätä yleensä 2–3 hyvää toistoa varastoon.</p>
+<div class="card" id="exerciseList"></div>
+<button class="primary" style="width:100%" onclick="finishStrength()">✓ Treeni valmis</button>
 </section>
-<section id="history" class="grid tabpage hidden"><div class="card"><h2>Historia</h2><div id="historyList" class="small">Ei vielä tallennettuja treenejä.</div></div></section>
-<section id="settings" class="grid tabpage hidden">
- <div class="card"><h2>Asetukset</h2><label class="small">Tavoite</label><select id="goal"><option value="fitness">Parempi kunto ja jaksaminen</option><option value="strength">Voima</option><option value="weight">Painonhallinta</option></select><br><br><label class="small">Treenit viikossa</label><select id="days"><option>2</option><option selected>3</option><option>4</option></select><br><br><button class="secondary" onclick="saveSettings()">Tallenna asetukset</button></div>
- <div class="card"><h2>Oma huomio</h2><p class="small">Tämä ensimmäinen versio tallentaa tiedot vain tähän selaimeen/puhelimeen. Seuraavassa versiossa voidaan lisätä painonseuranta, kävelyt, pyöräilyt, sykeseuranta ja älykkäämpi ohjelman eteneminen.</p></div>
+
+<section id="log" class="hidden">
+<h1>Kirjaa liikunta</h1><div class="card"><label>Laji</label>
+<select id="sport"><option>Kävely</option><option>Pyöräily</option><option>Hiihto</option><option>Laskettelu</option><option>Muu liikunta</option></select>
+<br><br><label>Kesto (min)</label><input id="mins" type="number" value="45" min="1">
+<br><br><label>Rasittavuus</label><select id="effort"><option>Kevyt</option><option>Reipas</option><option>Kova</option></select>
+<br><br><button class="primary" style="width:100%" onclick="saveCardio()">Tallenna</button></div>
+<div class="card"><h2>Paino</h2><div class="grid"><input id="weight" type="number" step=".1" placeholder="kg"><button class="secondary" onclick="saveWeight()">Tallenna paino</button></div><p class="small">Seuraa mieluummin usean viikon suuntaa kuin yksittäistä lukemaa.</p></div>
 </section>
+
+<section id="history" class="hidden"><h1>Historia</h1><div class="card" id="historyList">Ei vielä harjoituksia.</div></section>
 </main>
-<nav><div class="tabs"><button class="active" onclick="showTab('home',this)">Koti</button><button onclick="showTab('workout',this)">Treeni</button><button onclick="showTab('history',this)">Historia</button><button onclick="showTab('settings',this)">Asetukset</button></div></nav>
+<nav><button id="n-home" class="active" onclick="show('home')">🏠<br>Tänään</button><button id="n-workout" onclick="show('workout')">🏋️<br>Treeni</button><button id="n-log" onclick="show('log')">➕<br>Kirjaa</button><button id="n-history" onclick="show('history')">📈<br>Historia</button></nav>
 <script>
-const plan=[
- {name:'Koko keho A',desc:'Perusvoimaa ja hyvää tekemisen tuntumaa.',ex:[['Jalkaprässi',3,10],['Rintaprässi',3,10],['Ylätalja',3,10],['Reiden koukistus',2,12],['Pystypunnerrus laitteessa',2,10],['Vatsapunnerrus / lankku',3,12]]},
- {name:'Koko keho B',desc:'Tasapainoinen toinen salipäivä.',ex:[['Hack-kyykky / jalkaprässi',3,10],['Alatalja',3,10],['Vinopenkki laitteessa',3,10],['Reiden ojennus',2,12],['Hauiskääntö',2,12],['Ojentajapunnerrus',2,12]]},
- {name:'Koko keho C',desc:'Viikon kolmas treeni hieman kevyemmin.',ex:[['Jalkaprässi',3,12],['Ylätalja kapealla',3,10],['Rintaprässi',3,12],['Selänojennus',2,12],['Sivuviparit',2,12],['Vatsat',3,15]]}
-];
-let current=Number(localStorage.getItem('currentWorkout')||0)%plan.length; let setData={};
-function showTab(id,btn){document.querySelectorAll('.tabpage').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');if(id==='history')renderHistory();if(id==='workout')renderWorkout()}
-function openWorkout(){showTab('workout',document.querySelectorAll('.tabs button')[1])}
-function renderWorkout(){let w=plan[current];document.getElementById('workoutName').textContent=w.name;let root=document.getElementById('exerciseList');root.innerHTML='';w.ex.forEach((e,ei)=>{let d=document.createElement('div');d.className='exercise';d.innerHTML=`<h3>${e[0]}</h3><div class="small">${e[1]} sarjaa × noin ${e[2]} toistoa</div>`;for(let s=1;s<=e[1];s++){let key=`${ei}-${s}`;let row=document.createElement('div');row.className='setline';row.innerHTML=`<div class="small">${s}.</div><input inputmode="decimal" placeholder="kg" value="${setData[key]?.kg||''}" oninput="saveSet('${key}','kg',this.value)"><input inputmode="numeric" placeholder="toistot" value="${setData[key]?.reps||''}" oninput="saveSet('${key}','reps',this.value)"><button onclick="toggleSet('${key}',this)">${setData[key]?.done?'✓':'Tehty'}</button>`;if(setData[key]?.done)row.classList.add('done');d.appendChild(row)}root.appendChild(d)});updateHome()}
-function saveSet(k,f,v){setData[k]=setData[k]||{};setData[k][f]=v}
-function toggleSet(k,b){setData[k]=setData[k]||{};setData[k].done=!setData[k].done;b.textContent=setData[k].done?'✓':'Tehty';b.parentElement.classList.toggle('done',setData[k].done)}
-function finishWorkout(){let hist=JSON.parse(localStorage.getItem('history')||'[]');hist.unshift({date:new Date().toISOString(),name:plan[current].name,data:setData});localStorage.setItem('history',JSON.stringify(hist));current=(current+1)%plan.length;localStorage.setItem('currentWorkout',current);setData={};updateHome();alert('Treeni tallennettu. Hyvä työ!');showTab('home',document.querySelectorAll('.tabs button')[0])}
-function resetWorkout(){setData={};renderWorkout()}
-function renderHistory(){let hist=JSON.parse(localStorage.getItem('history')||'[]'),el=document.getElementById('historyList');if(!hist.length){el.textContent='Ei vielä tallennettuja treenejä.';return}el.innerHTML=hist.map(h=>`<div style="padding:10px 0;border-bottom:1px solid #243041"><b>${h.name}</b><br>${new Date(h.date).toLocaleString('fi-FI')}</div>`).join('')}
-function updateHome(){let hist=JSON.parse(localStorage.getItem('history')||'[]');let since=Date.now()-7*24*3600*1000;let wc=hist.filter(h=>new Date(h.date).getTime()>since).length;let target=Number(localStorage.getItem('days')||3);document.getElementById('weekCount').textContent=`${wc} / ${target}`;document.getElementById('weekBar').style.width=Math.min(100,wc/target*100)+'%';document.getElementById('nextName').textContent=plan[current].name;document.getElementById('nextDesc').textContent=plan[current].desc;document.getElementById('coachTitle').textContent=wc>=target?'Viikon tavoite täynnä':'Seuraava askel on helppo';document.getElementById('coachText').textContent=wc>=target?'Hyvä viikko. Kevyt kävely tai pyöräily sopii palauttavaksi tekemiseksi.':'Tee seuraava salitreeni silloin kun olo on palautunut. Lisää painoa vasta kun kaikki sarjat kulkevat hyvällä tekniikalla.'}
-function saveSettings(){localStorage.setItem('goal',document.getElementById('goal').value);localStorage.setItem('days',document.getElementById('days').value);updateHome();alert('Asetukset tallennettu')}
-window.addEventListener('load',()=>{document.getElementById('goal').value=localStorage.getItem('goal')||'fitness';document.getElementById('days').value=localStorage.getItem('days')||'3';updateHome();renderWorkout();if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js')})
-</script>
-</body></html>
+let feel='normaali';
+const gymA=[['Jalkaprässi','3 × 8–12'],['Rintaprässi','3 × 8–12'],['Ylätalja','3 × 8–12'],['Reiden koukistus','2 × 10–15'],['Soutu laitteessa','2 × 8–12'],['Vatsarutistus / keskivartalo','2 × 10–15']];
+const gymB=[['Goblet- tai hack-kyykky','3 × 8–12'],['Vinopenkki käsipainoilla / laite','3 × 8–12'],['Alatalja','3 × 8–12'],['Reiden ojennus','2 × 10–15'],['Pystypunnerrus laitteessa','2 × 8–12'],['Keskivartalo','2 × 10–15']];
+const home=[['Tuolilta ylösnousu / kyykky','3 × 10–15'],['Punnerrus seinää tai pöytää vasten','3 × 8–15'],['Askelkyykky tuesta','2 × 8–12 / jalka'],['Lantionnosto lattialla','3 × 12–20'],['Bird dog','2 × 8–12 / puoli'],['Lankku korotettuna tai lattialla','2 × 20–40 s']];
+let current='gymA';
+function data(){return JSON.parse(localStorage.getItem('kv3')||'{"logs":[],"weights":[]}')}
+function put(d){localStorage.setItem('kv3',JSON.stringify(d))}
+function weekLogs(){let d=data(),now=new Date(),day=(now.getDay()+6)%7,start=new Date(now);start.setHours(0,0,0,0);start.setDate(now.getDate()-day);return d.logs.filter(x=>new Date(x.date)>=start)}
+function stats(){let w=weekLogs();document.getElementById('weekCount').textContent=w.length;document.getElementById('strengthCount').textContent=w.filter(x=>x.type==='Lihaskunto').length+' / 2'}
+function recommend(){let s=weekLogs().filter(x=>x.type==='Lihaskunto').length, r=document.getElementById('rec'),why=document.getElementById('todayWhy'),txt=document.getElementById('todayText');
+if(feel==='väsynyt'){r.textContent='Tänään kevyt päivä: 30–45 min kävelyä tai lepo.';txt.textContent='Kevyt kävely / palautuminen';why.textContent='Väsymys huomioidaan – kaikkea ei tarvitse suorittaa.'}
+else if(s>=2){r.textContent='Viikon kaksi lihaskuntotreeniä ovat jo kasassa. Kevyt aerobinen sopii hyvin.';txt.textContent='Kävely, pyöräily tai muu aerobinen';why.textContent='Kolmas lihaskuntotreeni on vapaaehtoinen.'}
+else {current=s%2===0?'gymA':'gymB';r.textContent='Suositus: koko kehon lihaskuntotreeni.';txt.textContent=current==='gymA'?'Kuntosali A – koko keho':'Kuntosali B – koko keho';why.textContent='Tavoitteena vähintään kaksi lihaskuntotreeniä viikossa.'}}
+function renderWorkout(){let arr=current==='home'?home:(current==='gymB'?gymB:gymA);document.getElementById('workTitle').textContent=current==='home'?'Kotitreeni – ei välineitä':(current==='gymB'?'Koko keho B – kuntosali':'Koko keho A – kuntosali');
+document.getElementById('exerciseList').innerHTML='<div class="row"><button class="pill" onclick="current=\'gymA\';renderWorkout()">Sali A</button><button class="pill" onclick="current=\'gymB\';renderWorkout()">Sali B</button><button class="pill" onclick="current=\'home\';renderWorkout()">Koti</button></div>'+arr.map((e,i)=>`<div class="exercise" id="e${i}" onclick="this.classList.toggle('done')"><b>${e[0]}</b><br><span class="small">${e[1]} · napauta kun tehty</span></div>`).join('')}
+function finishStrength(){let d=data();d.logs.unshift({date:new Date().toISOString(),type:'Lihaskunto',name:current==='home'?'Kotitreeni':current==='gymB'?'Sali B':'Sali A'});put(d);stats();history();show('home');alert('Hyvä – treeni kirjattu!')}
+function saveCardio(){let d=data();d.logs.unshift({date:new Date().toISOString(),type:'Aerobinen',name:document.getElementById('sport').value+' '+document.getElementById('mins').value+' min ('+document.getElementById('effort').value+')'});put(d);stats();history();show('home')}
+function saveWeight(){let v=parseFloat(document.getElementById('weight').value);if(!v)return;let d=data();d.weights.unshift({date:new Date().toISOString(),kg:v});put(d);alert('Paino tallennettu.')}
+function history(){let d=data(),el=document.getElementById('historyList');el.innerHTML=d.logs.length?d.logs.map(x=>`<div class="exercise"><b>${x.name}</b><br><span class="small">${new Date(x.date).toLocaleDateString('fi-FI')} · ${x.type}</span></div>`).join(''):'Ei vielä harjoituksia.'}
+function show(id){['home','workout','log','history'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));document.getElementById('n-'+id).classList.add('active');if(id==='workout')renderWorkout();if(id==='history')history()}
+stats();recommend();renderWorkout();history();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');
+</script></body></html>

@@ -2,11 +2,10 @@
   "id": "./",
   "name": "Tommin Kuntovalmentaja",
   "short_name": "Kuntovalmentaja",
-  "description": "Henkilökohtainen treeniohjaus, seuranta ja eteneminen.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0b1220",
+  "background_color": "#07101f",
   "theme_color": "#111827",
   "icons": [
     {
